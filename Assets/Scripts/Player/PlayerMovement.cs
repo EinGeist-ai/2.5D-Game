@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -18,6 +19,10 @@ public class EightDirectionMovement : MonoBehaviour
     private float lastDashTime = -Mathf.Infinity;
     private Vector3 dashDirection;
 
+    public Vector3 CurrentDirection { get; private set; } = Vector3.forward;
+
+    public bool colliding;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,6 +35,8 @@ public class EightDirectionMovement : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = new Vector3(h, 0f, v).normalized;
+        if (direction.sqrMagnitude > 0.01f)
+            CurrentDirection = direction;
 
         // Dash logic
         if (!isDashing && Input.GetKey(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown && direction.sqrMagnitude > 0.01f)
@@ -39,12 +46,12 @@ public class EightDirectionMovement : MonoBehaviour
             dashTime = 0f;
             dashDirection = direction;
             lastDashTime = Time.time;
-            
+
         }
 
         if (isDashing)
         {
-            
+
             rb.MovePosition(rb.position + dashDirection * dashSpeed * Time.fixedDeltaTime);
             dashTime += Time.fixedDeltaTime;
             if (dashTime >= dashDuration)
@@ -86,6 +93,6 @@ public class EightDirectionMovement : MonoBehaviour
             if (v == 0 && h > 0) return 7;     // Right
             if (v == 0 && h < 0) return 3;     // Left
         }
-            return lastDirection;
+        return lastDirection;
     }
 }

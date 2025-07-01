@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
@@ -75,3 +76,4 @@ public class RandomTerrainPainter : EditorWindow
         Debug.Log("Random terrain layers applied with Layer 0 favored.");
     }
 }
+#endif
