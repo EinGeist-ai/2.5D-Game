@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-
+    
     private void Die()
     {
         // Handle enemy death (e.g., play animation, drop loot, etc.) 

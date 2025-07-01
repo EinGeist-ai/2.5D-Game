@@ -101,12 +101,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8316329459705890215}
+  - component: {fileID: 1127967725047328873}
   - component: {fileID: 8852382949164176800}
-  - component: {fileID: 9864364450104551}
+  - component: {fileID: 6774825498408112013}
+  - component: {fileID: 8689889731156623773}
   - component: {fileID: 8025374670041443134}
   - component: {fileID: 7339513571300809748}
-  - component: {fileID: 8689889731156623773}
-  - component: {fileID: 6774825498408112013}
+  - component: {fileID: 9864364450104551}
   - component: {fileID: 7884585785564717754}
   m_Layer: 0
   m_Name: Player
@@ -131,6 +132,19 @@ Transform:
   - {fileID: 8657272918538372343}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1127967725047328873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087698231106617681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf70d45caef68b078ced0c14ce5de2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellKeys: 310000003200000033000000340000007100000065000000780000006300000076000000
 --- !u!114 &8852382949164176800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,33 +161,39 @@ MonoBehaviour:
   dashSpeed: 30
   dashDuration: 0.42
   dashCooldown: 1
---- !u!54 &9864364450104551
-Rigidbody:
+  colliding: 0
+--- !u!114 &6774825498408112013
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6087698231106617681}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 116
-  m_CollisionDetection: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9485c7124a971caccbcbc1a710d719ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 1
+  attackCooldown: 1
+  attackDamage: 10
+  animator: {fileID: 7339513571300809748}
+--- !u!114 &8689889731156623773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6087698231106617681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af027ba698edaf73a8c89f8fdb30ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  healthRegenRate: 1
+  healthRegenDelay: 5
 --- !u!212 &8025374670041443134
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -247,38 +267,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8689889731156623773
-MonoBehaviour:
+--- !u!54 &9864364450104551
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6087698231106617681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4af027ba698edaf73a8c89f8fdb30ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthRegenRate: 1
-  healthRegenDelay: 5
---- !u!114 &6774825498408112013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6087698231106617681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9485c7124a971caccbcbc1a710d719ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 1
-  attackCooldown: 1
-  attackDamage: 10
-  animator: {fileID: 7339513571300809748}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 116
+  m_CollisionDetection: 1
 --- !u!65 &7884585785564717754
 BoxCollider:
   m_ObjectHideFlags: 0
