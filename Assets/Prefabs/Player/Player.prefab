@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5944530736320671694}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 3, z: -15}
+  m_LocalPosition: {x: 0, y: 4, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 8025374670041443134}
   - component: {fileID: 7339513571300809748}
   - component: {fileID: 9864364450104551}
-  - component: {fileID: 7884585785564717754}
+  - component: {fileID: 1090177707719263649}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -126,7 +126,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.6, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8657272918538372343}
@@ -145,6 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellKeys: 310000003200000033000000340000007100000065000000780000006300000076000000
+  spellPrefabs:
+  - {fileID: 7478731271839673279, guid: 4d3c8045dd8857a4b8d34c2361c61045, type: 3}
+  spellSlotIDs: 010000000200000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &8852382949164176800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd2ff81602107c0b78d85deb48df00c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  dashSpeed: 30
+  speed: 5
+  dashSpeed: 10
   dashDuration: 0.42
   dashCooldown: 1
   colliding: 0
@@ -174,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9485c7124a971caccbcbc1a710d719ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1
+  attackRange: 100
   attackCooldown: 1
   attackDamage: 10
   animator: {fileID: 7339513571300809748}
@@ -294,14 +297,14 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 1
---- !u!65 &7884585785564717754
-BoxCollider:
+--- !u!136 &1090177707719263649
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6087698231106617681}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 35004bdda77a6827bb7ca900657bfa32, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -312,6 +315,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5, y: 1, z: 2}
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0.1, z: 0}

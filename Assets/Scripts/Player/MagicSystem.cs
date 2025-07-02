@@ -8,6 +8,8 @@ public class MagicSystem : MonoBehaviour
 
     private Animator animator;
 
+    public GameObject crosshair; // Assign in Inspector (UI element)
+
 
     public GameObject[] spellPrefabs;
 
@@ -37,6 +39,7 @@ public class MagicSystem : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(GetComponentInChildren<Camera>().ScreenToWorldPoint(Input.mousePosition));
         for (int i = 0; i < spellKeys.Length; i++)
         {
             if (Input.GetKeyDown(spellKeys[i]) && !animator.GetBool("IsRolling"))
@@ -50,11 +53,8 @@ public class MagicSystem : MonoBehaviour
     public void CastSpell(int spellSlot)
     {
         int spellID = spellSlotIDs[spellSlot];
-        if (spellActions.ContainsKey(spellID))
+        if (spellActions.ContainsKey(spellID) && !animator.GetBool("Attacking"))
         {
-            animator.SetBool("Casting", true);
-            animator.SetTrigger("Cast"); // Always use the same trigger
-            StartCoroutine(StopCasting());
             spellActions[spellID].Invoke();
         }
         else
@@ -84,14 +84,39 @@ public class MagicSystem : MonoBehaviour
     }
 
     // Example spell methods
+    public Vector3 GetMouseWorldPosition()
+    {
+        Camera cam = GetComponentInChildren<Camera>();
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+        // Ground plane at y = 0
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float enter;
+
+        if (groundPlane.Raycast(ray, out enter))
+        {
+            return ray.GetPoint(enter);
+        }
+        else
+        {
+            Debug.LogWarning("Mouse ray did not hit the ground plane.");
+            return Vector3.zero;
+        }
+    }
+
     public void Spell1()
     {
-        Vector3 spawnPos = transform.position;
-        spawnPos.y = 0f;
+        animator.SetBool("Casting", true);
+        animator.SetTrigger("Cast");
+
+        Vector3 spawnPos = GetMouseWorldPosition();
+
         GameObject spawned = Instantiate(spellPrefabs[0], spawnPos, Quaternion.identity);
-        Destroy(spawned, 5f); // Destroy the spawned instance after 5 seconds
-        Debug.Log("Casting Spell 1 (ID 1)");
+        Destroy(spawned, 5f);
+
+        StartCoroutine(StopCasting());
     }
+
     public void Spell2()
     {
         Debug.Log("Casting Spell 2 (ID 2)");

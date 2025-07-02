@@ -5,20 +5,26 @@ using UnityEngine;
 public class Crosshait : MonoBehaviour
 {
     public RectTransform crosshair; // Assign in Inspector (UI element)
+    public Transform player;        // Assign in Inspector
+    public Animator playerAnimator; // Assign in Inspector
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false; // Hide the default cursor
-        Cursor.lockState = CursorLockMode.Confined ; // Lock the cursor to the center of the screen
+        Cursor.lockState = CursorLockMode.Confined; // Lock the cursor to the center of the screen
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (crosshair != null)
         {
             crosshair.position = Input.mousePosition;
+        }
+
+        if (player != null && playerAnimator != null)
+        {
+            int dir = GetCrosshairDirection(player);
+            playerAnimator.SetInteger("CastDirection", dir);
         }
     }
 
@@ -26,22 +32,19 @@ public class Crosshait : MonoBehaviour
     {
         Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(player.position);
         Vector2 diff = (Vector2)Input.mousePosition - (Vector2)playerScreenPos;
-        float h = Mathf.Round(diff.x);
-        float v = Mathf.Round(diff.y);
 
-        // Normalize to -1, 0, or 1 for both axes
-        h = Mathf.Abs(h) < 1f ? 0 : Mathf.Sign(h);
-        v = Mathf.Abs(v) < 1f ? 0 : Mathf.Sign(v);
+        float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+        // Angle is in degrees, 0 is right, 90 is up, -90 is down
 
-        // Use your direction logic
-        if (v > 0 && h == 0) return 5;     // Up
-        if (v > 0 && h > 0) return 6;      // UpRight
-        if (v > 0 && h < 0) return 4;      // UpLeft
-        if (v < 0 && h == 0) return 1;     // Down
-        if (v < 0 && h > 0) return 8;      // DownRight
-        if (v < 0 && h < 0) return 2;      // DownLeft
-        if (v == 0 && h > 0) return 7;     // Right
-        if (v == 0 && h < 0) return 3;     // Left
+        // 8 directions, clockwise, starting from up (5)
+        if (angle >= -22.5f && angle < 22.5f) return 7;         // Right
+        if (angle >= 22.5f && angle < 67.5f) return 6;          // UpRight
+        if (angle >= 67.5f && angle < 112.5f) return 5;         // Up
+        if (angle >= 112.5f && angle < 157.5f) return 4;        // UpLeft
+        if (angle >= 157.5f || angle < -157.5f) return 3;       // Left
+        if (angle >= -157.5f && angle < -112.5f) return 2;      // DownLeft
+        if (angle >= -112.5f && angle < -67.5f) return 1;       // Down
+        if (angle >= -67.5f && angle < -22.5f) return 8;        // DownRight
 
         return 0; // Center or no direction
     }
