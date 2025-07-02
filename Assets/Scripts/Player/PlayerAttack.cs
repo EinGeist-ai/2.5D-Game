@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown)
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown && !animator.GetBool("IsRolling"))
         {
             StartCoroutine(Attack());
             lastAttackTime = Time.time;
@@ -33,22 +33,15 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        // Play attack animation
-        if (animator != null)
-        {
-            animator.SetBool("Attacking", true);
-            animator.SetTrigger("Meele");
-        }
 
+        animator.SetBool("Attacking", true);
+        animator.SetTrigger("Meele");
         yield return new WaitForSeconds(0.20825f); // Wait for animation timing
-
         Vector3 attackDirection = transform.forward;
         if (movement != null && movement.CurrentDirection.sqrMagnitude > 0.01f)
             attackDirection = movement.CurrentDirection;
-
         Vector3 origin = transform.position + Vector3.up * 0.5f;
         float spacing = 0.35f; // Adjust for how far apart the rays are
-
         // Calculate left and right offsets
         Vector3 right = Vector3.Cross(Vector3.up, attackDirection).normalized;
         Vector3[] origins = new Vector3[]
@@ -57,12 +50,10 @@ public class PlayerAttack : MonoBehaviour
             origin + right * spacing, // right
             origin - right * spacing  // left
         };
-
         bool hitSomething = false;
         for (int i = 0; i < origins.Length; i++)
         {
             if (hitSomething) break; // Stop if already hit 
-
             RaycastHit hit;
             if (Physics.Raycast(origins[i], attackDirection, out hit, attackRange))
             {
@@ -80,11 +71,15 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
-
         yield return new WaitForSeconds(0.20825f); // Wait for animation timing
+        
+
 
         if (animator != null)
+        {
+            // Reset the attacking state after the attack animation
             animator.SetBool("Attacking", false);
+        }
     }
 
     void OnDrawGizmosSelected()

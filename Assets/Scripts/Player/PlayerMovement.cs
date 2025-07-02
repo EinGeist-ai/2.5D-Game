@@ -42,6 +42,8 @@ public class EightDirectionMovement : MonoBehaviour
         if (!isDashing && Input.GetKey(KeyCode.Space) && Time.time >= lastDashTime + dashCooldown && direction.sqrMagnitude > 0.01f)
         {
             animator.SetBool("IsRolling", true);
+            animator.SetBool("Attacking", false);
+            animator.SetBool("Casting", false);
             isDashing = true;
             dashTime = 0f;
             dashDirection = direction;

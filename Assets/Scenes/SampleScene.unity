@@ -1059,6 +1059,14 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1127967725047328873, guid: 6d5bec60073a1c286ada02f6f618b33e, type: 3}
+      propertyPath: spellSlotIDs.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127967725047328873, guid: 6d5bec60073a1c286ada02f6f618b33e, type: 3}
+      propertyPath: spellSlotIDs.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6087698231106617681, guid: 6d5bec60073a1c286ada02f6f618b33e, type: 3}
       propertyPath: m_Name
       value: Player
