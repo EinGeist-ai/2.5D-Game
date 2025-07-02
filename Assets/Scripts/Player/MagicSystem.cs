@@ -8,8 +8,9 @@ public class MagicSystem : MonoBehaviour
 
     private Animator animator;
 
-    public GameObject crosshair; // Assign in Inspector (UI element)
+    public ParticleSystem magicCircle; // Assign in Inspector (magic circle prefab)
 
+    public GameObject crosshair; // Assign in Inspector (UI element)
 
     public GameObject[] spellPrefabs;
 
@@ -22,6 +23,12 @@ public class MagicSystem : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        magicCircle = GetComponentInChildren<ParticleSystem>();
+
+        if (magicCircle != null)
+        {
+            magicCircle.Stop();
+        }
 
         // Initialize spell slot IDs (default: 1, 2, 0, 0, ...)
         spellSlotIDs[0] = 1; // Slot 0: Spell1
@@ -39,7 +46,6 @@ public class MagicSystem : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GetComponentInChildren<Camera>().ScreenToWorldPoint(Input.mousePosition));
         for (int i = 0; i < spellKeys.Length; i++)
         {
             if (Input.GetKeyDown(spellKeys[i]) && !animator.GetBool("IsRolling"))
@@ -67,6 +73,10 @@ public class MagicSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7668f);
         animator.SetBool("Casting", false);
+        if (magicCircle != null)
+        {
+            magicCircle.Stop();
+        }
     }
 
     // Assign a spell to a slot at runtime
@@ -108,6 +118,10 @@ public class MagicSystem : MonoBehaviour
     {
         animator.SetBool("Casting", true);
         animator.SetTrigger("Cast");
+        if (magicCircle != null)
+        {
+            magicCircle.Play();
+        }
 
         Vector3 spawnPos = GetMouseWorldPosition();
 
