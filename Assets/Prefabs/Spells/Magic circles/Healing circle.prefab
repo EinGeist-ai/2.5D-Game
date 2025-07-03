@@ -19708,6 +19708,7 @@ GameObject:
   - component: {fileID: 6211125795773073634}
   - component: {fileID: 959509697232157438}
   - component: {fileID: 8371709242088337358}
+  - component: {fileID: -984068148903615883}
   m_Layer: 0
   m_Name: Healing circle
   m_TagString: Untagged
@@ -23378,7 +23379,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     type: 1
     collisionMode: 0
@@ -24601,4 +24602,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97df7ea435776429b9c9654dcf2c909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healing: -10
+  healing: 10
+  healCooldown: 1
+  player: {fileID: 0}
+--- !u!135 &-984068148903615883
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986504087968017091}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}

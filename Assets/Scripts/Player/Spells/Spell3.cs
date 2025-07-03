@@ -2,8 +2,15 @@ using UnityEngine;
 
 public class Spell3 : MonoBehaviour
 {
-    public int healing = -10;
+    public int healing = 10;
     private ParticleSystem ps;
+
+    public float healCooldown = 1;
+    private float lastHealTime = 0f;
+
+    public GameObject player; // Reference to the player GameObject 
+
+    private bool inRadius = false;
 
     private void Awake()
     {
@@ -14,26 +21,51 @@ public class Spell3 : MonoBehaviour
         }
     }
 
-    private void OnParticleCollision(GameObject other)
+    void Update()
     {
-        if (other.CompareTag("Enemy"))
+        if (inRadius && Time.time >= lastHealTime + healCooldown)
         {
-            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+
+            lastHealTime = Time.time;
+            if (player != null)
             {
-                enemyHealth.TakeDamage(healing);
-                Debug.Log($"Spell1 hit {other.name} for {healing} damage.");
+                PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.Heal(healing);
+                    Debug.Log($"Spell3 healed {player.name} for {healing} health.");
+                }
+                else
+                {
+                    Debug.LogWarning($"PlayerHealth component not found on {player.name}. Cannot apply healing.");
+                }
             }
             else
             {
-                Debug.LogWarning($"Enemy component not found on {other.name}. Cannot apply damage.");
+                Debug.LogWarning("Player GameObject is not assigned or found.");
             }
         }
-        else
-        {
-            Debug.Log($"Spell1 collided with non-enemy object: {other.name}");
-        }
-
-        
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRadius = true;
+            player = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRadius = false;
+            player = null;
+        }
+    }
+
+    
+    
+
 }

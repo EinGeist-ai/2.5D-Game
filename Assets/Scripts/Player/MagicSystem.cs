@@ -197,7 +197,7 @@ public class MagicSystem : MonoBehaviour
     public void Spell3()
     {
         animator.SetBool("Casting", true);
-        animator.SetTrigger("Cast");
+        animator.SetTrigger("CastSelf");
         if (magicCircle != null)
         {
             magicCircle.Play();
@@ -207,7 +207,7 @@ public class MagicSystem : MonoBehaviour
         spawnPos.y = 0.5f; // Ensure it's on the ground
 
         GameObject spawned = Instantiate(spellPrefabs[2], spawnPos, Quaternion.identity);
-        Destroy(spawned, 5f);
+        Destroy(spawned, 4f);
 
         StartCoroutine(StopCasting());
     }
