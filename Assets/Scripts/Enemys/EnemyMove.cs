@@ -53,7 +53,7 @@ public class EnemyMove : MonoBehaviour
 
             offset = Mathf.Sqrt(eX * eX + eY * eY + eZ * eZ);
 
-            if (isSlowed=true)
+            if (isSlowed)
               
 
             rb.MovePosition(rb.position + enemyDirection * EnemyMoveSpeed * 1/offset * Time.deltaTime);
