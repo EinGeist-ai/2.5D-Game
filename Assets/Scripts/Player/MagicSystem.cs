@@ -14,6 +14,9 @@ public class MagicSystem : MonoBehaviour
 
     public GameObject[] spellPrefabs;
 
+    public float[] spellCooldowns = new float[9]; // Cooldowns for each spell slot
+    public float[] lastCastTimes = new float[9]; // Last cast times for each spell slot
+
     // Each slot holds a spell ID (e.g., 1 = Spell1, 2 = Spell2, etc.)
     public int[] spellSlotIDs = new int[9];
 
@@ -33,13 +36,32 @@ public class MagicSystem : MonoBehaviour
         // Initialize spell slot IDs (default: 1, 2, 0, 0, ...)
         spellSlotIDs[0] = 1; // Slot 0: Spell1
         spellSlotIDs[1] = 2; // Slot 1: Spell2
+        spellSlotIDs[2] = 3; // Slot 2: Empty
+        spellSlotIDs[3] = 4; // Slot 3: Empty
+        spellSlotIDs[4] = 5; // Slot 4: Empty
+        spellSlotIDs[5] = 6; // Slot 5: Empty
+        spellSlotIDs[6] = 7; // Slot 6: Empty
+        spellSlotIDs[7] = 8; // Slot 7: Empty
+        spellSlotIDs[8] = 9; // Slot 8: Empty
         // ...initialize others as needed
 
+
+        for (int i = 0; i < spellSlotIDs.Length; i++)
+        {
+            lastCastTimes[i] = -Mathf.Infinity; // Initialize last cast times to allow immediate casting
+        }
         // Map spell IDs to methods
         spellActions = new Dictionary<int, System.Action>
         {
             { 1, Spell1 },
-            { 2, Spell2 }
+            { 2, Spell2 },
+            { 3, Spell3 },
+            { 4, Spell4 },
+            { 5, Spell5 },
+            { 6, Spell6 },
+            { 7, Spell7 },
+            { 8, Spell8 },
+            { 9, Spell9 }
             // Add more spells here
         };
     }
@@ -48,10 +70,20 @@ public class MagicSystem : MonoBehaviour
     {
         for (int i = 0; i < spellKeys.Length; i++)
         {
-            if (Input.GetKeyDown(spellKeys[i]) && !animator.GetBool("IsRolling"))
+            if (Input.GetKeyDown(spellKeys[i]) && !animator.GetBool("IsRolling") && !animator.GetBool("Attacking"))
             {
-                CastSpell(i);
-                Debug.Log("Spell cast with key: " + spellKeys[i]);
+                // Check cooldown
+                if (Time.time - lastCastTimes[i] >= spellCooldowns[i])
+                {
+                    CastSpell(i);
+                    lastCastTimes[i] = Time.time; // Update last cast time
+                    Debug.Log("Spell cast with key: " + spellKeys[i]);
+                }
+                else
+                {
+                    float timeLeft = spellCooldowns[i] - (Time.time - lastCastTimes[i]);
+                    Debug.Log($"Spell {i + 1} is on cooldown for {timeLeft:F1} more seconds.");
+                }
             }
         }
     }
@@ -133,7 +165,81 @@ public class MagicSystem : MonoBehaviour
 
     public void Spell2()
     {
-        Debug.Log("Casting Spell 2 (ID 2)");
-        // No animator.SetTrigger here!
+        animator.SetBool("Casting", true);
+        animator.SetTrigger("Cast");
+        if (magicCircle != null)
+        {
+            magicCircle.Play();
+        }
+
+        // Start at the player position
+        Vector3 spawnPos = transform.position;
+        spawnPos.y = 0.5f; // Ensure it's on the ground
+
+        // Direction from player to mouse world position (on ground)
+        Vector3 targetPos = GetMouseWorldPosition();
+        Vector3 direction = (targetPos - spawnPos).normalized;
+
+        // Optional: Ignore vertical difference for a flat shot
+        direction.y = 0f;
+        direction = direction.normalized;
+
+        GameObject spawned = Instantiate(spellPrefabs[1], spawnPos, Quaternion.LookRotation(direction));
+        Rigidbody rb = spawned.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = direction * 10f; // Example speed
+        }
+        Destroy(spawned, 2f);
+
+        StartCoroutine(StopCasting());
     }
+    public void Spell3()
+    {
+        animator.SetBool("Casting", true);
+        animator.SetTrigger("Cast");
+        if (magicCircle != null)
+        {
+            magicCircle.Play();
+        }
+
+        Vector3 spawnPos = transform.position;
+        spawnPos.y = 0.5f; // Ensure it's on the ground
+
+        GameObject spawned = Instantiate(spellPrefabs[2], spawnPos, Quaternion.identity);
+        Destroy(spawned, 5f);
+
+        StartCoroutine(StopCasting());
+    }
+    public void Spell4()
+    {
+        // Implement Spell4 logic here
+        Debug.Log("Spell4 cast!");
+    }
+    public void Spell5()
+    {
+        // Implement Spell5 logic here
+        Debug.Log("Spell5 cast!");
+    }
+    public void Spell6()
+    {
+        // Implement Spell6 logic here
+        Debug.Log("Spell6 cast!");
+    }
+    public void Spell7()
+    {
+        // Implement Spell7 logic here
+        Debug.Log("Spell7 cast!");
+    }
+    public void Spell8()
+    {
+        // Implement Spell8 logic here
+        Debug.Log("Spell8 cast!");
+    }
+    public void Spell9()
+    {
+        // Implement Spell9 logic here
+        Debug.Log("Spell9 cast!");
+    }
+
 }
