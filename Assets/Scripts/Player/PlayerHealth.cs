@@ -29,6 +29,20 @@ public class PlayerHealth : MonoBehaviour
 
         regenCoroutine = StartCoroutine(HealthRegen());
     }
+    public void Heal(int heal)
+    {
+        if (currentHealth < maxHealth)
+        {
+            currentHealth += heal;
+        }
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        
+        
+    }
+
 
     private IEnumerator HealthRegen()
     {
