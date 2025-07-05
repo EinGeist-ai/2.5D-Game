@@ -20,7 +20,7 @@ public class StartMenu : MonoBehaviour
     public void StartGame()
     {
         Time.timeScale = 1f; // Resume the game
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Cursor.lockState = CursorLockMode.Confined; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
         gameObject.SetActive(false); // Hide the start menu
     }

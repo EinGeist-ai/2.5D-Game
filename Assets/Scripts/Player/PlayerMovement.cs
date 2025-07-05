@@ -79,6 +79,7 @@ public class EightDirectionMovement : MonoBehaviour
         {
             animator.SetInteger("Direction", lastDirection);
         }
+
     }
 
     int GetDirection(float h, float v)
@@ -96,4 +97,10 @@ public class EightDirectionMovement : MonoBehaviour
         }
         return lastDirection;
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        rb.velocity = Vector3.zero; // Stop movement on collision exit
+    }    
+    
 }
