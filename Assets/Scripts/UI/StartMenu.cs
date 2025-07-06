@@ -13,6 +13,7 @@ public class StartMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
         gameObject.SetActive(true); // Show the start menu
+        GlobalVariables.isGamePaused = true; // Set game paused state
         if (optionsMenu != null)
             optionsMenu.SetActive(false); // Hide options menu at start
     }
@@ -23,6 +24,7 @@ public class StartMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
         gameObject.SetActive(false); // Hide the start menu
+        GlobalVariables.isGamePaused = false; // Set game paused state to false
     }
 
     public void OpenOptions()
