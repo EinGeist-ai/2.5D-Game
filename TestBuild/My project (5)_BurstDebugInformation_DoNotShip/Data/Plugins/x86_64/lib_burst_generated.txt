@@ -1,4 +1,4 @@
-Library: E:\Projects\2.5D-Game\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
+Library: B:\unity\2,5d\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --platform=Windows
 --backend=burst-llvm-16
 --target=X64_SSE2
@@ -9,10 +9,10 @@ Library: E:\Projects\2.5D-Game\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_ge
 --target-framework=NetFramework
 --linker-options=PdbAltPath="My project (5)_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=E:\Projects\2.5D-Game\Temp\Burst
---key-folder=E:/Unity 2022.3.35f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
---decode-folder=E:\Projects\2.5D-Game\Library\Burst
---output=E:\Projects\2.5D-Game\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
+--temp-folder=B:\unity\2,5d\Temp\Burst
+--key-folder=B:/unity/2022.3.35f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--decode-folder=B:\unity\2,5d\Library\Burst
+--output=B:\unity\2,5d\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
@@ -30,10 +30,10 @@ Library: E:\Projects\2.5D-Game\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_ge
 --target-framework=NetFramework
 --linker-options=PdbAltPath="My project (5)_Data/Plugins/x86_64/lib_burst_generated.pdb"
 --generate-link-xml=Temp\burst.link.xml
---temp-folder=E:\Projects\2.5D-Game\Temp\Burst
---key-folder=E:/Unity 2022.3.35f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
---decode-folder=E:\Projects\2.5D-Game\Library\Burst
---output=E:\Projects\2.5D-Game\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
+--temp-folder=B:\unity\2,5d\Temp\Burst
+--key-folder=B:/unity/2022.3.35f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport
+--decode-folder=B:\unity\2,5d\Library\Burst
+--output=B:\unity\2,5d\Temp\BurstOutput\Data\Plugins\x86_64\lib_burst_generated
 --pdb-search-paths=Temp/ManagedSymbols/
 
 --method=Unity.Burst.BurstCompiler+BurstCompilerHelper, Unity.Burst, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null::IsBurstEnabled()--8c2be93e18276203cbd918daa2748a10
