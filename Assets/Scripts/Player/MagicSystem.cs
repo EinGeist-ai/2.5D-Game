@@ -190,7 +190,7 @@ public class MagicSystem : MonoBehaviour
         {
             rb.velocity = direction * 10f; // Example speed
         }
-        Destroy(spawned, 2f);
+        Destroy(spawned, 1.2f);
 
         StartCoroutine(StopCasting());
     }
