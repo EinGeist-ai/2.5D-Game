@@ -103,7 +103,7 @@ public class MagicSystem : MonoBehaviour
 
     public IEnumerator StopCasting()
     {
-        yield return new WaitForSeconds(0.7668f);
+        yield return new WaitForSeconds(0.3834f);
         animator.SetBool("Casting", false);
         if (magicCircle != null)
         {

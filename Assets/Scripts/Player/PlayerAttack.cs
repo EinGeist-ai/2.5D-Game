@@ -33,51 +33,44 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator Attack()
     {
-
         animator.SetBool("Attacking", true);
         animator.SetTrigger("Meele");
         yield return new WaitForSeconds(0.20825f); // Wait for animation timing
+
         Vector3 attackDirection = transform.forward;
         if (movement != null && movement.CurrentDirection.sqrMagnitude > 0.01f)
             attackDirection = movement.CurrentDirection;
         Vector3 origin = transform.position + Vector3.up * 0.5f;
-        float spacing = 0.35f; // Adjust for how far apart the rays are
-        // Calculate left and right offsets
-        Vector3 right = Vector3.Cross(Vector3.up, attackDirection).normalized;
-        Vector3[] origins = new Vector3[]
-        {
-            origin, // center
-            origin + right * spacing, // right
-            origin - right * spacing  // left
-        };
+
+        // Define angles for the rays: center, ±22.5°, ±45°
+        float[] angles = { 0f, 22.5f, -22.5f, 45f, -45f };
         bool hitSomething = false;
-        for (int i = 0; i < origins.Length; i++)
+
+        for (int i = 0; i < angles.Length; i++)
         {
-            if (hitSomething) break; // Stop if already hit 
+            if (hitSomething) break; // Stop if already hit
+            Vector3 dir = Quaternion.AngleAxis(angles[i], Vector3.up) * attackDirection;
             RaycastHit hit;
-            if (Physics.Raycast(origins[i], attackDirection, out hit, attackRange))
+            if (Physics.Raycast(origin, dir, out hit, attackRange))
             {
                 EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(attackDamage);
-                    Debug.Log("Hit " + hit.collider.name + " for " + attackDamage + " damage. (Ray " + i + ")");
+                    Debug.Log("Hit " + hit.collider.name + " for " + attackDamage + " damage. (Ray " + i + " angle " + angles[i] + ")");
                     hitSomething = true;
-                    break; // Stop checking other rays
+                    break;
                 }
                 else
                 {
-                    Debug.Log("Hit " + hit.collider.name + ", but it has no EnemyHealth component. (Ray " + i + ")");
+                    Debug.Log("Hit " + hit.collider.name + ", but it has no EnemyHealth component. (Ray " + i + " angle " + angles[i] + ")");
                 }
             }
         }
-        yield return new WaitForSeconds(0.20825f); // Wait for animation timing
-        
-
+        yield return new WaitForSeconds(0.20825f);
 
         if (animator != null)
         {
-            // Reset the attacking state after the attack animation
             animator.SetBool("Attacking", false);
         }
     }
@@ -91,12 +84,12 @@ public class PlayerAttack : MonoBehaviour
 
         Gizmos.color = Color.red;
         Vector3 origin = transform.position + Vector3.up * 0.5f;
-        float spacing = 0.35f;
-        Vector3 right = Vector3.Cross(Vector3.up, attackDirection).normalized;
 
-        // Draw three rays: center, right, left
-        Gizmos.DrawRay(origin, attackDirection.normalized * attackRange);
-        Gizmos.DrawRay(origin + right * spacing, attackDirection.normalized * attackRange);
-        Gizmos.DrawRay(origin - right * spacing, attackDirection.normalized * attackRange);
+        float[] angles = { 0f, 22.5f, -22.5f, 45f, -45f };
+        foreach (float angle in angles)
+        {
+            Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * attackDirection;
+            Gizmos.DrawRay(origin, dir.normalized * attackRange);
+        }
     }
 }
