@@ -25,7 +25,7 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown && !animator.GetBool("IsRolling"))
+        if (Input.GetMouseButtonDown(0) && Time.time >= lastAttackTime + attackCooldown && !animator.GetBool("IsRolling") && GlobalVariables.isGamePaused == false)
         {
             StartCoroutine(Attack());
             lastAttackTime = Time.time;

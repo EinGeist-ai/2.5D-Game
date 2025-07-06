@@ -92,7 +92,7 @@ public class MagicSystem : MonoBehaviour
     public void CastSpell(int spellSlot)
     {
         int spellID = spellSlotIDs[spellSlot];
-        if (spellActions.ContainsKey(spellID) && !animator.GetBool("Attacking"))
+        if (spellActions.ContainsKey(spellID) && !animator.GetBool("Attacking") && GlobalVariables.isGamePaused == false)
         {
             spellActions[spellID].Invoke();
         }
