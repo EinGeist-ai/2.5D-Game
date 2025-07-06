@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = 0f; // Time when the last attack was made
 
     public Animator animator; // Assign in Inspector or get in Start()
+    public Animator animator2; // Assign in Inspector or get in Start()
 
     private EightDirectionMovement movement;
 
@@ -35,6 +36,8 @@ public class PlayerAttack : MonoBehaviour
     {
         animator.SetBool("Attacking", true);
         animator.SetTrigger("Meele");
+        animator2.SetBool("Attacking", true);
+        animator2.SetTrigger("Meele");
         yield return new WaitForSeconds(0.20825f); // Wait for animation timing
 
         Vector3 attackDirection = transform.forward;

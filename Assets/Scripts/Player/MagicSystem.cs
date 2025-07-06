@@ -7,6 +7,7 @@ public class MagicSystem : MonoBehaviour
     public KeyCode[] spellKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4, KeyCode.X, KeyCode.C, KeyCode.V, KeyCode.E, KeyCode.Q };
 
     private Animator animator;
+    public Animator animator2; // Second animator for dual animations
 
     public ParticleSystem magicCircle; // Assign in Inspector (magic circle prefab)
 
@@ -105,6 +106,7 @@ public class MagicSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.3834f);
         animator.SetBool("Casting", false);
+        animator2.SetBool("Casting", false);
         if (magicCircle != null)
         {
             magicCircle.Stop();
@@ -150,6 +152,8 @@ public class MagicSystem : MonoBehaviour
     {
         animator.SetBool("Casting", true);
         animator.SetTrigger("Cast");
+        animator2.SetBool("Casting", true);
+        animator2.SetTrigger("Cast");
         if (magicCircle != null)
         {
             magicCircle.Play();
@@ -167,6 +171,8 @@ public class MagicSystem : MonoBehaviour
     {
         animator.SetBool("Casting", true);
         animator.SetTrigger("Cast");
+        animator2.SetBool("Casting", true);
+        animator2.SetTrigger("Cast");
         if (magicCircle != null)
         {
             magicCircle.Play();
@@ -198,6 +204,8 @@ public class MagicSystem : MonoBehaviour
     {
         animator.SetBool("Casting", true);
         animator.SetTrigger("CastSelf");
+        animator2.SetBool("Casting", true);
+        animator2.SetTrigger("CastSelf");
         if (magicCircle != null)
         {
             magicCircle.Play();
