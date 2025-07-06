@@ -43,9 +43,6 @@ public class EightDirectionMovement : MonoBehaviour
             animator.SetBool("IsRolling", true);
             animator.SetBool("Attacking", false);
             animator.SetBool("Casting", false);
-            animator2.SetBool("IsRolling", true);
-            animator2.SetBool("Attacking", false);
-            animator2.SetBool("Casting", false);
             isDashing = true;
             dashTime = 0f;
             dashDirection = direction;
@@ -62,7 +59,6 @@ public class EightDirectionMovement : MonoBehaviour
             {
                 isDashing = false;
                 animator.SetBool("IsRolling", false);
-                animator2.SetBool("IsRolling", false);
             }
         }
         else
@@ -72,19 +68,16 @@ public class EightDirectionMovement : MonoBehaviour
 
         bool isMoving = direction.sqrMagnitude > 0.01f;
         animator.SetBool("IsMoving", isMoving);
-        animator2.SetBool("IsMoving", isMoving);
 
         if (isMoving)
         {
             int dirValue = GetDirection(h, v);
             animator.SetInteger("Direction", dirValue);
-            animator2.SetInteger("Direction", dirValue);
             lastDirection = dirValue;
         }
         else
         {
             animator.SetInteger("Direction", lastDirection);
-            animator2.SetInteger("Direction", lastDirection);
         }
 
     }

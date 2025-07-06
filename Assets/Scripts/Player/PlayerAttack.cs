@@ -36,8 +36,6 @@ public class PlayerAttack : MonoBehaviour
     {
         animator.SetBool("Attacking", true);
         animator.SetTrigger("Meele");
-        animator2.SetBool("Attacking", true);
-        animator2.SetTrigger("Meele");
         yield return new WaitForSeconds(0.20825f); // Wait for animation timing
 
         Vector3 attackDirection = transform.forward;
