@@ -11,7 +11,6 @@ public class EightDirectionMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    public Animator animator2;
     private int lastDirection = 1;
 
     private bool isDashing = false;

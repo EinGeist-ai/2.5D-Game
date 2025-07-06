@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = 0f; // Time when the last attack was made
 
     public Animator animator; // Assign in Inspector or get in Start()
-    public Animator animator2; // Assign in Inspector or get in Start()
+
 
     private EightDirectionMovement movement;
 
