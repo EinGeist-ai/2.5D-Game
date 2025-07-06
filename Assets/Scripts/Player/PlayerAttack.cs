@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float attackRange = 100.0f; // Range of the attack
+    public float attackRange = 10.0f; // Range of the attack
     public float attackCooldown = 1.0f; // Time between attacks
     public int attackDamage = 10; // Damage dealt per attack
     private float lastAttackTime = 0f; // Time when the last attack was made
