@@ -14,7 +14,7 @@ public class Spell2 : MonoBehaviour
         }
     }
 
-    private void OnParticleCollision(GameObject other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
