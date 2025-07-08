@@ -15,4 +15,19 @@ public class EnemyMovement2 : MonoBehaviour
 
         enemy.SetDestination(playerPos);
     }
+
+   public IEnumerator EnemySlow(float slowDuration, float slowFactor)
+    {
+        enemy.speed *= slowFactor; // Slow down the enemy
+        yield return new WaitForSeconds(slowDuration);
+        enemy.speed /= slowFactor; // Restore original speed
+    }
+    public void StartSlow(float duration, float factor)
+    {
+        StartCoroutine(EnemySlow(duration, factor)); // Example usage with 2 seconds slow duration and 0.5 slow factor
+    }
+
+
+
+
 }

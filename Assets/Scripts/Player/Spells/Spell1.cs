@@ -4,6 +4,7 @@ public class Spell1 : MonoBehaviour
 {
     public int damage = 10;
     private ParticleSystem ps;
+    public EnemyMovement2 enemyMovement;
 
     private void Awake()
     {
@@ -18,11 +19,13 @@ public class Spell1 : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            enemyMovement = other.GetComponent<EnemyMovement2>();
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(damage);
                 Debug.Log($"Spell1 hit {other.name} for {damage} damage.");
+                enemyMovement.StartSlow(2f, 0.8f); // Example usage with 2 seconds slow duration and 0.5 slow factor
             }
             else
             {
