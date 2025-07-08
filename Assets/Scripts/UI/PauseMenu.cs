@@ -17,6 +17,15 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pauseMenuUI != null)
