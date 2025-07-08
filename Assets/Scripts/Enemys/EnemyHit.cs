@@ -13,10 +13,10 @@ public class EnemyHit : MonoBehaviour
 
     void Update()
     {
-        if (player == null || enemy == null) return;
+       // if (player == null || enemy == null) return;
 
         float distance = Vector3.Distance(player.transform.position, enemy.transform.position);
-        if (distance <= 0.6f && Time.time >= lastAttackTime + attackCooldown)
+        if (distance <= 1.5 && Time.time >= lastAttackTime + attackCooldown)
         {
             Vector3 direction = (player.transform.position - enemy.transform.position).normalized;
             RaycastHit hitDistance;
@@ -41,6 +41,7 @@ public class EnemyHit : MonoBehaviour
             Vector3 attackDirection = (player.transform.position - enemy.transform.position).normalized;
             Vector3 dir = Quaternion.AngleAxis(angles[i], Vector3.up) * attackDirection;
             RaycastHit hit;
+            Debug.DrawRay(enemy.transform.position, dir, Color.red, 1f);
             if (Physics.Raycast(enemy.transform.position, dir, out hit, attackRange))
             {
                 PlayerHealth playerHealth = hit.collider.GetComponent<PlayerHealth>();
