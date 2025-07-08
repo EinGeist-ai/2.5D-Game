@@ -44140,6 +44140,7 @@ GameObject:
   - component: {fileID: 8705986516592252172}
   - component: {fileID: 9114385727598248433}
   - component: {fileID: 4525506086276850328}
+  - component: {fileID: 8277459311842200672}
   m_Layer: 0
   m_Name: Laser AOE
   m_TagString: Untagged
@@ -44147,14 +44148,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &419305800515105285
-Transform:
+--- !u!224 &419305800515105285
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7478731271839673279}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -44172,6 +44172,11 @@ Transform:
   - {fileID: 8508536309069456861}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &8705986516592252172
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -49070,6 +49075,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!222 &8277459311842200672
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478731271839673279}
+  m_CullTransparentMesh: 1
 --- !u!1 &9063691487585404173
 GameObject:
   m_ObjectHideFlags: 0

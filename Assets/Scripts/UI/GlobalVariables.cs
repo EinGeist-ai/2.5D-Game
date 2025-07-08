@@ -4,5 +4,12 @@ using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
 {
+
     public static bool isGamePaused = false;
+
+
+
+
+
+
 }
